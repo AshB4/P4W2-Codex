@@ -1,17 +1,20 @@
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 import psycopg2
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 
-# DB connection function
 def get_connection():
     return psycopg2.connect(
-        host="pathway-4.ca1yc8okmo57.us-east-1.rds.amazonaws.com",
-        database="db_ashley",
-        user="ashley",
-        password="ashley_pass",
-        port="5432",
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        port=os.getenv("DB_PORT"),
     )
 
 
